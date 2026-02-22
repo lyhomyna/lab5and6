@@ -38,7 +38,7 @@ func main() {
 		log.Fatal("Failed to create table:", err)
 	}
 
-	// Prefil database
+	// Prefill database
 	prefilDatabase()
 
 	http.HandleFunc("/", loggingMiddleware(homeHandler))
@@ -46,7 +46,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"  // Default port	
+		port = "8080" // Default port
 	}
 
 	log.Printf("JDM Registry starting on port %s\n", port)
@@ -62,9 +62,9 @@ func prefilDatabase() {
 	if count == 0 {
 		log.Println("Database is empty. Tuning the engine with 11 items...")
 		items := []struct {
-			name string
+			name  string
 			model string
-		} {
+		}{
 			{"RB26DETT Engine", "Nissan Skyline"},
 			{"2JZ-GTE Engine", "Toyota Supra"},
 			{"TE37 Wheels", "Nissan Silvia"},
@@ -75,7 +75,7 @@ func prefilDatabase() {
 			{"HKS Turbo Kit", "Toyota AE86"},
 			{"Ohlins Suspension", "Nissan 350Z"},
 			{"Nismo Body Kit", "Honda Civic Type R"},
-			{"Greddy Intercooler", "Nissan GT-R"},		
+			{"Greddy Intercooler", "Nissan GT-R"},
 		}
 		for _, item := range items {
 			_, err := db.Exec("INSERT INTO jdm_parts (name, car_model) VALUES ($1, $2)", item.name, item.model)
@@ -190,4 +190,3 @@ func deletePart(w http.ResponseWriter, req *http.Request) {
 	}
 	fmt.Fprintln(w, "Item deleted")
 }
-
