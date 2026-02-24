@@ -4,14 +4,14 @@ set -e
 PROJECT_ID="cloudlab5and6"
 IMAGE_NAME="jdm-app"
 
-echo "Running terraform destroy"
-cd terraform
+#echo "Running terraform destroy"
+d terraform
 terraform destroy -auto-aprove
 
-echo "Removing docker image from GCR"
+# echo "Removing docker image from GCR"
 gcloud container images delete gcr.io/${PROJECT_ID}/${IMAGE_NAME}:latest --quiet
 
-echo "Enabling Google Cloud APIs"
+echo "Disabling Google Cloud APIs"
 gcloud services disable \
     compute.googleapis.com \
     sqladmin.googleapis.com \
@@ -19,7 +19,7 @@ gcloud services disable \
     cloudbuild.googleapis.com \
     iam.googleapis.com \
     container.googleapis.com \
-    storage.googleapis.com
+    storage.googleapis.com --force
 
 echo "All resources were deleted"
 

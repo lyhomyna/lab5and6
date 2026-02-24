@@ -1,5 +1,5 @@
 provider "google" {
-  project     = "lab5and6"
-  region      = "us-central1"
+  project = "cloudlab5and6"
+  region  = "us-central1"
 }
 

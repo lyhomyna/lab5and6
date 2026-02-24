@@ -4,6 +4,9 @@ set -e
 PROJECT_ID="cloudlab5and6"
 IMAGE_NAME="jdm-app"
 
+echo "Setting up project $PROJECT_ID"
+gcloud config set project $PROJECT_ID
+
 echo "Enabling Google Cloud APIs"
 gcloud services enable \
     compute.googleapis.com \
